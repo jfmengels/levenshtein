@@ -31,4 +31,11 @@ suite =
                         abs (String.length example1 - String.length example2)
                 in
                 Expect.atLeast diff (distance example1 example2)
+        , fuzz2 Fuzz.string Fuzz.string "distance should be the same when reversing the arguments" <|
+            \example1 example2 ->
+                let
+                    diff =
+                        abs (String.length example1 - String.length example2)
+                in
+                Expect.equal (distance example1 example2) (distance example2 example1)
         ]
